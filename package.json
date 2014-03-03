@@ -1,0 +1,30 @@
+{
+  "name": "node-voldemort",
+  "version": "0.0.1",
+  "description": "Voldemort client for Node",
+  "voldemort-version": "1.6.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mojn/node-voldemort"
+  },
+  "keywords": [
+    "voldemort",
+    "key-value",
+    "db",
+    "node"
+  ],
+  "author": "Jacob Wejendorp <jacob@wejendorp.dk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mojn/node-voldemort/issues"
+  },
+  "homepage": "https://github.com/mojn/node-voldemort",
+  "dependencies": {
+    "protobufjs": "~2.0.5",
+    "debug": "~0.7.4"
+  }
+}
