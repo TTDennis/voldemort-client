@@ -22,7 +22,27 @@ describe('Protocol pb0', function() {
     }, done);
   });
 
-  it('can parse protobuf', function(done) {
+  it('can parse protobuf', function encProto(done) {
+    var msgBuilder = require('../../lib/protobuf')('client');
+    var Msg = msgBuilder.build('voldemort');
+    if(!Msg) {
+      return done(new Error('Could not create message builder from protobuf'));
+    }
+    debugger;
+    var req = new Msg.VoldemortRequest({
+      // node_id: 1,
+      // version: 3
+      type:         0,
+      should_route: false,
+      store:        'SomeStore',
+      // get: '',
+      // getAll: '',
+      // put: '',
+      // delete: '',
+      // requestRouteType: ''
+    });
+    req.encode().toString('base64');
+
     done();
   });
 });
