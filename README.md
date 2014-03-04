@@ -1,4 +1,4 @@
-# Node-voldemort
+# Node-voldemort (WIP)
 [Voldemort](http://github.com/voldemort/voldemort) is the open source fork of Amazon DynamoDB, which
 is a distributed key-value store.
 
