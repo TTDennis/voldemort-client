@@ -17,7 +17,7 @@ describe('Protocol pb0', function() {
   });
 
   it('can handshake', function(done) {
-    client.createConnection({
+    Client.createConnection({
       host: host, port: port
     }, done);
   });
