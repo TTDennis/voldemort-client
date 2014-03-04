@@ -26,6 +26,7 @@
   "dependencies": {
     "protobufjs": "git+https://github.com/wejendorp/ProtoBuf.js.git",
     "debug": "~0.7.4",
-    "mocha": "~1.17.1"
+    "mocha": "~1.17.1",
+    "async": "~0.2.10"
   }
 }

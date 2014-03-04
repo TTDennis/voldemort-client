@@ -9,7 +9,7 @@ var host = 'localhost';
 
 describe('Protocol pb0', function() {
   before(function(done) {
-    client = new Client('someStore', 'bootstrapUrl', 500);
+    client = new Client('someStore', [{hostName: host, port: port}], 500);
     client.init(done);
   })
   after(function(done) {
@@ -28,7 +28,7 @@ describe('Protocol pb0', function() {
     if(!Msg) {
       return done(new Error('Could not create message builder from protobuf'));
     }
-    debugger;
+
     var req = new Msg.VoldemortRequest({
       // node_id: 1,
       // version: 3
