@@ -9,7 +9,7 @@ describe('Protocol', function() {
     var store = 'Hogwarts';
 
     it('encodes/decodes correctly', function() {
-      var req = Request.get(key, {store: store}).serialize();
+      var req = Request.get(key, {store: store}).toBuffer();
       var decoded = Request.fromBuffer(req);
       chai.expect(decoded.store).to.equal(store);
     });
