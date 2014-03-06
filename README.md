@@ -15,5 +15,3 @@ npm install node-voldemort
 
 # Documentation
 The client is based on [the official client spec](https://github.com/voldemort/voldemort/wiki/Writing-own-client-for-Voldemort).
-
-

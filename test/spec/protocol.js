@@ -1,6 +1,6 @@
 /* */
 var Request  = require('../../lib/protocol/request');
-var Response = require('../../lib/protocol/response');
+// var Response = require('../../lib/protocol/response');
 var chai = require('chai');
 
 describe('Protocol', function() {
@@ -15,6 +15,8 @@ describe('Protocol', function() {
     });
   });
   describe('Response', function() {
+    it('encodes/decodes correctly', function() {
 
+    });
   });
 });
