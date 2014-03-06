@@ -1,3 +1,4 @@
+
 var chai = require('chai');
 
 var Client = require('../../lib/client');
@@ -7,8 +8,8 @@ var host = 'localhost';
 
 describe('client', function() {
   before(function(done) {
-    client = new Client('someStore');
-    client.init({hostName: host, port: port}, done);
+    client = new Client('test');
+    client.init({host: host, port: port}, done);
   });
   after(function(done) {
     client.close(done);
@@ -16,6 +17,18 @@ describe('client', function() {
 
   it('initializes correctly', function() {
     chai.assert(client.connection);
-    chai.assert(client.nodes.length === 1);
+    chai.assert(client.nodes.length >= 1);
+  });
+  it('can put a key', function(done) {
+    client.put('chocolate', 'yum', function(err, res) {
+      if(err) return done(err);
+      done();
+    });
+  });
+  it('can get a key', function(done) {
+    client.get('chocolate', function(err, res) {
+      if(err) return done(err);
+      done();
+    });
   });
 });

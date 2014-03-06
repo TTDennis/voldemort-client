@@ -1,0 +1,24 @@
+ <stores>
+  <store>
+    <name>test</name>
+    <replication-factor>2</replication-factor>
+    <preferred-reads>2</preferred-reads>
+    <required-reads>1</required-reads>
+    <preferred-writes>2</preferred-writes>
+    <required-writes>1</required-writes>
+    <persistence>bdb</persistence>
+    <routing>client</routing>
+    <routing-strategy>consistent-routing</routing-strategy>
+    <key-serializer>
+      <type>string</type>
+      <schema-info>utf8</schema-info>
+    </key-serializer>
+    <value-serializer>
+      <type>json</type>
+      <schema-info version="1">[{"id":"int32", "name":"string"}]</schema-info>
+      <compression>
+        <type>gzip</type>
+      </compression>
+    </value-serializer>
+  </store>
+</stores>

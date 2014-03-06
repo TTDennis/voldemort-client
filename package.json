@@ -1,5 +1,5 @@
 {
-  "name": "node-voldemort",
+  "name": "voldemort",
   "version": "0.0.1",
   "description": "Voldemort client for Node",
   "voldemort-version": "1.6.1",
@@ -17,7 +17,10 @@
     "db",
     "node"
   ],
-  "author": "Jacob Wejendorp <jacob@wejendorp.dk>",
+  "author": {
+    "name": "Jacob Wejendorp",
+    "email": "jw@mojn.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mojn/node-voldemort/issues"
