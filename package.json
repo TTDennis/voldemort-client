@@ -30,7 +30,8 @@
     "protobufjs": "git+https://github.com/wejendorp/ProtoBuf.js.git",
     "debug": "~0.7.4",
     "async": "~0.2.10",
-    "xml2js": "~0.4.1"
+    "xml2js": "~0.4.1",
+    "long": "~1.1.2"
   },
   "devDependencies": {
     "chai": "~1.9.0",
