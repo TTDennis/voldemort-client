@@ -19,16 +19,17 @@ describe('client', function() {
     chai.assert(client.connection);
     chai.assert(client.nodes.length >= 1);
   });
-  // it('can put a key', function(done) {
-  //   client.put('chocolate', 'yum', function(err, res) {
-  //     if(err) return done(err);
-  //     done();
-  //   });
-  // });
-  // it.skip('can get a key', function(done) {
-  //   client.get('chocolate', function(err, res) {
-  //     if(err) return done(err);
-  //     done();
-  //   });
-  // });
+  it('can put a key', function(done) {
+    client.put('chocolate', 'yuck', function(err, res) {
+      if(err) return done(err);
+      done();
+    });
+  });
+  it('can get a key', function(done) {
+    client.get('chocolate', function(err, res) {
+      if(err) return done(err);
+      chai.assert(res.value.toString() === 'yuck');
+      done();
+    });
+  });
 });
