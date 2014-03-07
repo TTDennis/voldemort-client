@@ -75,7 +75,7 @@ describe('client', function() {
   });
 
 
-  describe.skip('#del', function() {
+  describe('#del', function() {
     var version;
     before(function initKey(done) {
       client.put('chocolate', 'yum', function(err, result) {
