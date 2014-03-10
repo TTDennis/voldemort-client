@@ -12,6 +12,12 @@ This project uses round robin load balancing, and does not support client-side r
 npm install voldemort
 ```
 
+Run tests with
+```
+npm test
+```
+Requires a voldemort instance running on `localhost` port `6666`.
+
 # Documentation
 The client is based on [the official client spec](https://github.com/voldemort/voldemort/wiki/Writing-own-client-for-Voldemort).
 
@@ -86,3 +92,6 @@ Options:
 
 ### voldemort#close(done)
 Close the active connection with voldemort.
+
+# License
+MIT

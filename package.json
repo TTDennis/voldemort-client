@@ -1,6 +1,6 @@
 {
   "name": "voldemort",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Voldemort client for Node",
   "voldemort-version": "1.6.1",
   "main": "index.js",
