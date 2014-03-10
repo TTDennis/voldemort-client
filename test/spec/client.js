@@ -12,7 +12,13 @@ var host = 'localhost';
 
 describe('client', function() {
   before(function(done) {
-    client = Client.bootstrap({host: host, port: port}, {store: 'test'}, done);
+    client = Client.bootstrap({host: host, port: port}, {
+      store: 'test',
+      valueSerializer: {
+        deserialize: function(b) { return b.toBuffer().toString(); },
+        serialize: function(v) { return v; }
+      }
+    }, done);
   });
 
   after(function(done) {
@@ -70,7 +76,7 @@ describe('client', function() {
       client.get('chocolate', function(err, res) {
         if(err) return done(err);
 
-        chai.assert(res.value.toString() === 'yum');
+        chai.expect(res.value).to.eql('yum');
         done();
       });
     });
@@ -95,8 +101,8 @@ describe('client', function() {
     it('retrieves values', function(done) {
       client.getAll(['chocolate', 'cookie'], function(err, res) {
         if(err) return done(err);
-        chai.expect(res.chocolate.value.toBuffer().toString()).to.eql('yum');
-        chai.expect(res.cookie.value.toBuffer().toString()).to.eql('nom');
+        chai.expect(res.chocolate.value).to.eql('yum');
+        chai.expect(res.cookie.value).to.eql('nom');
         done();
       });
     });

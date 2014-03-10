@@ -44,6 +44,12 @@ Will initialize cluster information against the first working host.
 Options:
   * `store:string` Set a default store for this client. If not set, store must
     be set with every request (`#get` etc).
+  * `valueSerializer:Serializer` {serialize: fn(value), deserialize: fn(value)}
+    Values are passed through `serialize` on insertion, and `deserialize` on retrieval.
+    Defaults to returning raw buffer on retrieval.
+  * `keySerializer:Serializer` {serialize: fn(value), deserialize: fn(value)}
+    Keys are passed through `serialize` on insertion, and `deserialize` on retrieval.
+    Defaults to string deserialization on retrieval.
   * `timeout:integer` Default `10000`. Timeout requests after `timeout` ms
   * `reconnectInterval:integer` Default `500`. Round robin batch size. The
     client will change node after this many requests to distribute load across
