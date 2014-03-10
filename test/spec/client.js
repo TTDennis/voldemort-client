@@ -4,7 +4,7 @@ var chai = require('chai');
 var spies = require('chai-spies');
 chai.use(spies);
 
-var Client = require('../../lib/client');
+var Client = require('../../');
 var protocol = require('../../lib/protocol/protobuf')('client');
 
 var port = 6666;
@@ -60,6 +60,8 @@ describe('client', function() {
     var version;
     before(function initKey(done) {
       client.put('chocolate', 'yum', function(err, result) {
+        if(err) return done(err);
+        
         version = result.version;
         done();
       });
@@ -68,6 +70,7 @@ describe('client', function() {
     it('retrieves value', function(done) {
       client.get('chocolate', function(err, res) {
         if(err) return done(err);
+
         chai.assert(res.value.toString() === 'yum');
         done();
       });
@@ -82,6 +85,8 @@ describe('client', function() {
     var version;
     before(function initKey(done) {
       client.put('chocolate', 'yum', function(err, result) {
+        if(err) return done(err);
+
         version = result.version;
         done();
       });
@@ -122,6 +127,9 @@ describe('client', function() {
         chai.expect(spy).to.have.been.called.once;
         done();
       });
+    });
+    it('times out after $n seconds', function() {
+
     });
     it.skip('reconnects on error??', function() {
       done(new Error('not implemented'));

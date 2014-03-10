@@ -1,0 +1,45 @@
+
+var Client = require('../../');
+var server = require('../server');
+var chai = require('chai');
+
+describe('errorhandling', function() {
+  var port = 7777;
+  before(function(done) {
+    server.start(port, done);
+  });
+  before(function(done) {
+    client = new Client('test');
+    client.init({host: 'localhost', port: port}, done);
+  });
+
+  after(function(done) {
+    client.close(done);
+  });
+  after(function(done) {
+    server.stop(done);
+  });
+
+  it('can connect with test server', function() {
+    chai.assert(client.nodes);
+  });
+
+  describe('failover', function() {
+    before(function initKey(done) {
+      client.setTimeout(500);
+      client.put('chocolate', 'yum', function(err, result) {
+        if(err) return done(err);
+
+        version = result.version;
+        done();
+      });
+    });
+    it('writes to real node', function(done) {
+      client.get('chocolate', function(err, res) {
+        chai.expect(err).to.be.null;
+        chai.expect(res).to.not.be.null;
+        done();
+      });
+    });
+  });
+});
