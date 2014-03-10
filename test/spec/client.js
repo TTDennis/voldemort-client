@@ -1,5 +1,8 @@
 
+var async = require('async');
 var chai = require('chai');
+var spies = require('chai-spies');
+chai.use(spies);
 
 var Client = require('../../lib/client');
 var protocol = require('../../lib/protocol/protobuf')('client');
@@ -94,11 +97,33 @@ describe('client', function() {
   });
 
 
-  describe.skip('#reconnect', function() {
-    it('reconnects after 500 requests', function(done) {
-      done(new Error('not implemented'));
+  describe('#reconnect', function() {
+    var $n = 10;
+    var orig, spy;
+
+    beforeEach(function() {
+      orig = client.reconnect;
+      spy = chai.spy(client.reconnect);
+      client.reconnect = spy;
     });
-    it('reconnects on error??', function() {
+    afterEach(function() {
+      client.reconnect = orig;
+    });
+
+
+    it('reconnects after $n requests', function(done) {
+      client.reconnectInterval = $n;
+      var gets = Array.apply(null, Array($n)).map(function() {
+        return function(callback) {
+          client.get('test', callback);
+        };
+      });
+      async.series(gets, function(err, results) {
+        chai.expect(spy).to.have.been.called.once;
+        done();
+      });
+    });
+    it.skip('reconnects on error??', function() {
       done(new Error('not implemented'));
     });
   });
