@@ -12,8 +12,7 @@ var host = 'localhost';
 
 describe('client', function() {
   before(function(done) {
-    client = new Client('test');
-    client.init({host: host, port: port}, done);
+    client = Client.bootstrap({host: host, port: port}, {store: 'test'}, done);
   });
 
   after(function(done) {
@@ -61,7 +60,7 @@ describe('client', function() {
     before(function initKey(done) {
       client.put('chocolate', 'yum', function(err, result) {
         if(err) return done(err);
-        
+
         version = result.version;
         done();
       });
