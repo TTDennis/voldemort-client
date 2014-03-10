@@ -56,7 +56,7 @@ Options:
 
 ### voldemort#getAll(keys, [options,] done)
 Gets the values of `keys` from the default store or `options.store` if set.
-Returns [Versioned](proto/voldemort-client.proto#L22) or `null` if `key` doesn't exist.
+Returns `Object({key: version})` or empty object if no `keys` exist.
 
 Options:
   * `store:string` Store to query for `keys`. Required if no default store is set in `#bootstrap`.

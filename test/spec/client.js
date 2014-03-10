@@ -79,6 +79,38 @@ describe('client', function() {
     });
   });
 
+  describe('#getAll', function() {
+    var version;
+    before(function initKey(done) {
+      client.put('chocolate', 'yum', function(err, result) {
+        if(err) return done(err);
+
+        version = result.version;
+        client.put('cookie', 'nom', function(err, result) {
+          done();
+        });
+      });
+    });
+
+    it('retrieves values', function(done) {
+      client.getAll(['chocolate', 'cookie'], function(err, res) {
+        if(err) return done(err);
+        chai.expect(res.chocolate.value.toBuffer().toString()).to.eql('yum');
+        chai.expect(res.cookie.value.toBuffer().toString()).to.eql('nom');
+        done();
+      });
+    });
+    it('returns empty object for missing keys', function(done) {
+        client.getAll(['houdini'], function(err, res) {
+          if(err) return done(err);
+
+          chai.expect(res.houdini).to.be.undefined;
+          chai.expect(res).to.eql({});
+          done();
+        });
+    });
+  });
+
 
   describe('#del', function() {
     var version;
