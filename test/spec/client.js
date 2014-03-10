@@ -127,11 +127,5 @@ describe('client', function() {
         done();
       });
     });
-    it('times out after $n seconds', function() {
-
-    });
-    it.skip('reconnects on error??', function() {
-      done(new Error('not implemented'));
-    });
   });
 });

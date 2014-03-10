@@ -5,6 +5,7 @@ is a distributed key-value store.
 This project aims to provide a NodeJS driver for Voldemort, to allow you to roll your own
 instances without AWS.
 
+This project uses round robin load balancing, and does not support client-side routing of keyspace.
 
 # Installation
 ```
@@ -16,9 +17,10 @@ The client is based on [the official client spec](https://github.com/voldemort/v
 
 Example (error-handling left out for brevity):
 ```js
-var voldemort = require('voldemort');
-var Client = voldemort('myProducts');
-Client.bootstrap([{host: 'localhost', port: 6666}], function(err, client) {
+var Voldemort = require('voldemort');
+// Create a client against local voldemort, with default store 'products'
+Voldemort.bootstrap([{host: 'localhost', port: 6666}], {store: 'products'}, function(err, client) {
+  // Retrieve 'product1' from 'products' store
   client.get('product1', function(err, product) {
     console.log(product.value);   //Buffer value
     console.log(product.version); //VectorClock
@@ -33,15 +35,54 @@ Client.bootstrap([{host: 'localhost', port: 6666}], function(err, client) {
 Returns a new voldemort client instance bootstrapped against the list of hosts.
 Will initialize cluster information against the first working host.
 
-Options include:
-  * `store:string`: default store for this client
-  * `timeout:integer`: timeout requests after `n` ms
+Options:
+  * `store:string` Set a default store for this client. If not set, store must
+    be set with every request (`#get` etc).
+  * `timeout:integer` Default `10000`. Timeout requests after `timeout` ms
+  * `reconnectInterval:integer` Default `500`. Round robin batch size. The
+    client will change node after this many requests to distribute load across
+    the cluster.
+  * `randomize:bool` Default `true`. Set to `false` to disable randomizing node
+    selection in cluster. This will use the nodes in-order starting from the
+    bootstrap node.
 
-### voldemort#get
-### voldemort#getAll
+### voldemort#get(key, [options,] done)
+Gets the value of `key` from the default store or `options.store` if set.
+Returns [Versioned](proto/voldemort-client.proto#L22) or `null` if `key` doesn't exist.
+
+Options:
+  * `store:string` Store to query for `key`. Required if no default store is set in `#bootstrap`.
+  * `shouldRoute:bool` Set to `false` to disable serverside routing.
+
+### voldemort#getAll(keys, [options,] done)
+Gets the values of `keys` from the default store or `options.store` if set.
+Returns [Versioned](proto/voldemort-client.proto#L22) or `null` if `key` doesn't exist.
+
+Options:
+  * `store:string` Store to query for `keys`. Required if no default store is set in `#bootstrap`.
+  * `shouldRoute:bool` Set to `false` to disable serverside routing.
 
 
-### voldemort#put
+### voldemort#put(key, value, [options,] done)
+Puts the values of `keys` into the default store or `options.store` if set.
+Returns [Versioned](proto/voldemort-client.proto#L22) or `null` on error.
+
+Options:
+  * `version:VectorClock` Optional. If not set, fetches the current version
+    of `key` before putting. If set, puts the version given, or errors if outdated.
+  * `store:string` Required if no default store is set in `#bootstrap`.
+  * `shouldRoute:bool` Set to `false` to disable serverside routing.
 
 
-### voldemort#del
+### voldemort#del(key, [options,] done)
+Deletes `key` from the store.
+
+Options:
+  * `version:VectorClock` Optional. If not set, fetches the current version
+    of `key` before deleting. If set, puts the version given, or errors if outdated.
+  * `store:string` Required if no default store is set in `#bootstrap`.
+  * `shouldRoute:bool` Set to `false` to disable serverside routing.
+
+
+### voldemort#close(done)
+Close the active connection with voldemort.
