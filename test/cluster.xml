@@ -3,17 +3,17 @@
   <server>
     <id>0</id>
     <host>localhost</host>
-    <http-port>8081</http-port>
-    <socket-port>6666</socket-port>
-    <admin-port>6667</admin-port>
+    <http-port>8082</http-port>
+    <socket-port>7777</socket-port>
+    <admin-port>7778</admin-port>
     <partitions>0, 1</partitions>
   </server>
   <server>
     <id>1</id>
     <host>localhost</host>
-    <http-port>8082</http-port>
-    <socket-port>7777</socket-port>
-    <admin-port>7778</admin-port>
+    <http-port>8081</http-port>
+    <socket-port>6666</socket-port>
+    <admin-port>6667</admin-port>
     <partitions>0, 1</partitions>
   </server>
 </cluster>

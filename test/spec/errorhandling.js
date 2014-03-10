@@ -9,7 +9,11 @@ describe('errorhandling', function() {
     server.start(port, done);
   });
   before(function(done) {
-    client = Client.bootstrap({host: 'localhost', port: port}, {store: 'test'}, done);
+    client = Client.bootstrap({
+      host: 'localhost',
+      port: port,
+      randomize: false // for failover testing
+    }, {store: 'test'}, done);
   });
 
   after(function(done) {
