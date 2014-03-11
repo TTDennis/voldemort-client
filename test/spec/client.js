@@ -56,7 +56,7 @@ describe('client', function() {
     client.get(key, function(err, res) {
       if(err) return done(err);
 
-      chai.assert(res === null);
+      chai.expect(res).to.be.null;
       done();
     });
   }
@@ -92,9 +92,7 @@ describe('client', function() {
         if(err) return done(err);
 
         version = result.version;
-        client.put('cookie', 'nom', function(err, result) {
-          done();
-        });
+        client.put('cookie', 'nom', done);
       });
     });
 
@@ -125,12 +123,19 @@ describe('client', function() {
         if(err) return done(err);
 
         version = result.version;
-        done();
+        // done();
+        client.put('cookie', 'nom', done);
       });
     });
-
     it('removes a key', function(done) {
-      client.del('chocolate', version, function(err) {
+      client.del('cookie', function(err) {
+        if(err) return done(err);
+
+        getNull('cookie', done);
+      });
+    });
+    it('removes a key with specific version', function(done) {
+      client.del('chocolate', {version: version}, function(err) {
         if(err) return done(err);
 
         getNull('chocolate', done);
