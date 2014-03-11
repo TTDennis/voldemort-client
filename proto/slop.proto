@@ -17,8 +17,3 @@ message Slop {
   optional int32 node_id = 5;
   optional int64 arrived = 6;
 }
-
-  
-  
-
-  

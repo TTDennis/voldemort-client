@@ -1,7 +1,7 @@
 {
   "name": "voldemort",
-  "version": "0.1.0",
-  "description": "Voldemort client for Node",
+  "version": "0.2.0",
+  "description": "Voldemort client for Node.js",
   "voldemort-version": "1.6.1",
   "main": "index.js",
   "scripts": {
@@ -17,10 +17,6 @@
     "db",
     "node"
   ],
-  "author": {
-    "name": "Jacob Wejendorp",
-    "email": "jw@mojn.com"
-  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mojn/node-voldemort/issues"
@@ -28,14 +24,14 @@
   "homepage": "https://github.com/mojn/node-voldemort",
   "dependencies": {
     "protobufjs": "git+https://github.com/wejendorp/ProtoBuf.js.git",
-    "debug": "~0.7.4",
-    "async": "~0.2.10",
-    "xml2js": "~0.4.1",
-    "long": "~1.1.2"
+    "debug": "0.7.4",
+    "async": "0.2.10",
+    "xml2js": "0.4.1",
+    "long": "1.1.2"
   },
   "devDependencies": {
-    "chai": "~1.9.0",
-    "mocha": "~1.17.1",
-    "chai-spies": "~0.5.1"
+    "chai": "1.9.0",
+    "mocha": "1.17.1",
+    "chai-spies": "0.5.1"
   }
 }

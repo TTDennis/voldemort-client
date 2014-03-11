@@ -1,56 +1,58 @@
-# Node-voldemort (WIP)
-[Voldemort](http://github.com/voldemort/voldemort) is the open source fork of Amazon DynamoDB, which
-is a distributed key-value store.
+[Voldemort](http://github.com/voldemort/voldemort) is the open source clone of Amazon DynamoDB, a distributed key-value store.
 
-This project aims to provide a NodeJS driver for Voldemort, to allow you to roll your own
-instances without AWS.
+This project is a Node.js driver for Voldemort. It uses round-robin load balancing and does not support client-side routing of keyspace.
 
-This project uses round robin load balancing, and does not support client-side routing of keyspace.
+## Installation
 
-# Installation
-```
-npm install voldemort
+```bash
+$ npm install voldemort
 ```
 
 Run tests with
-```
-npm test
-```
-Requires a voldemort instance running on `localhost` port `6666`.
 
-# Documentation
-The client is based on [the official client spec](https://github.com/voldemort/voldemort/wiki/Writing-own-client-for-Voldemort).
+```bash
+$ npm test
+```
 
-Example (error-handling left out for brevity):
+Requires a local Voldemort instance on port `6666`.
+
+## Documentation
+
+The client is based on the official client [specificiation](https://github.com/voldemort/voldemort/wiki/Writing-own-client-for-Voldemort).
+
+### Example
+
+Please notice that error handling is left out for brevity.
+
 ```js
 var Voldemort = require('voldemort');
-// Create a client against local voldemort, with default store 'products'
-Voldemort.bootstrap([{host: 'localhost', port: 6666}], {store: 'products'}, function(err, client) {
-  // Retrieve 'product1' from 'products' store
-  client.get('product1', function(err, product) {
+// Create a client against local voldemort, with default store `products`.
+Voldemort.bootstrap([{ host: 'localhost', port: 6666 }], { store: 'products' }, function (err, client) {
+  // Retrieve 'product1' from 'products' store.
+  client.get('product1', function (err, product) {
     console.log(product.value);   //Buffer value
     console.log(product.version); //VectorClock
   });
 });
 ```
 
-
 ## API
 
 ### Voldemort#bootstrap(hosts, [options,] done)
-Returns a new voldemort client instance bootstrapped against the list of hosts.
-Will initialize cluster information against the first working host.
+
+Returns a new Voldemort instance bootstrapped against the array of hosts.
+Will initialize the cluster information against the first working host.
 
 Options:
   * `store:string` Set a default store for this client. If not set, store must
     be set with every request (`#get` etc).
-  * `valueSerializer:Serializer` {serialize: fn(value), deserialize: fn(value)}
+  * `valueSerializer:Serializer` { serialize: fn (value), deserialize: fn (value) }
     Values are passed through `serialize` on insertion, and `deserialize` on retrieval.
     Defaults to returning raw buffer on retrieval.
   * `keySerializer:Serializer` {serialize: fn(value), deserialize: fn(value)}
     Keys are passed through `serialize` on insertion, and `deserialize` on retrieval.
     Defaults to string deserialization on retrieval.
-  * `timeout:integer` Default `10000`. Timeout requests after `timeout` ms
+  * `timeout:integer` Default `10000`. Timeout requests after `timeout` ms.
   * `reconnectInterval:integer` Default `500`. Round robin batch size. The
     client will change node after this many requests to distribute load across
     the cluster.
@@ -100,4 +102,13 @@ Options:
 Close the active connection with voldemort.
 
 # License
-MIT
+
+The MIT License (MIT)
+
+Copyright © 2014, Mojn Ltd \<open-source@mojn.com \>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
