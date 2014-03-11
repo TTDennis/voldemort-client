@@ -163,7 +163,7 @@ describe('client', function () {
   });
 
   describe('#reconnect', function () {
-    var $n = 10; // @todo @wejendorp $ notation?
+    var interval = 10; // @todo @wejendorp $ notation?
     var orig;
     var spy;
 
@@ -177,18 +177,22 @@ describe('client', function () {
       client.reconnect = orig;
     });
 
-    it('reconnects after $n requests', function(done) {
-      client.reconnectInterval = $n;
+    it('reconnects after [reconnectInterval] requests', function(done) {
+      client.reconnectInterval = interval;
 
-      var gets = Array.apply(null, Array($n)).map(function() {
+      var gets = Array.apply(null, Array(interval)).map(function(v,i) {
         return function(callback) {
-          client.get('test', callback);
+          client.get('test', function(err) {
+            // console.log('cb '+i);
+            // console.log(err);
+            callback(err);
+          });
         };
       });
 
       async.series(gets, function(err, results) {
         chai.expect(spy).to.have.been.called.once;
-        done();
+        done(err);
       });
     });
   });

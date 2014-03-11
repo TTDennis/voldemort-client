@@ -1,6 +1,6 @@
 
 node_modules/
-tags/
+tags
 lib-cov/
 
 *.py

@@ -37,8 +37,8 @@ describe('errorhandling', function () {
     server.stop(done);
   });
 
-  it('can connect with test server', function () {
-    chai.assert(client.nodes);
+  before(function preCondition() {
+    chai.expect(client.nodes).to.have.length(2);
   });
 
   describe('failover', function () {
