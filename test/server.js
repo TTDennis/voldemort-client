@@ -29,7 +29,7 @@ exports.start = function (port, done) {
   server.listen(port, done);
 };
 
-exports.stop = function (done) {
+exports.close = function (done) {
   server.close(done);
 };
 

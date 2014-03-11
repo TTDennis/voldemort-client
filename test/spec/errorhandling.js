@@ -34,7 +34,7 @@ describe('errorhandling', function () {
   });
 
   after(function (done) {
-    server.stop(done);
+    server.close(done);
   });
 
   before(function preCondition() {
@@ -87,7 +87,7 @@ describe('errorhandling', function () {
     });
 
     it('errbacks for non-ok protocol', function (done) {
-      var server = require('net').createServer(function (conn) { //'connection' listener
+      var failServer = require('net').createServer(function (conn) { //'connection' listener
         conn.on('data', function (data) {
           conn.write('no');
         });
@@ -95,7 +95,7 @@ describe('errorhandling', function () {
       Client.bootstrap({ host:'localhost', port: 9938 }, function (err, client) {
         chai.expect(err).to.not.be.null;
         chai.expect(err.message).to.eql('All bootstrap attempts failed');
-        server.close();
+        failServer.close();
         done();
       });
     });

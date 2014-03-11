@@ -163,7 +163,7 @@ describe('client', function () {
   });
 
   describe('#reconnect', function () {
-    var interval = 10; // @todo @wejendorp $ notation?
+    var interval = 10;
     var orig;
     var spy;
 
@@ -180,11 +180,9 @@ describe('client', function () {
     it('reconnects after [reconnectInterval] requests', function(done) {
       client.reconnectInterval = interval;
 
-      var gets = Array.apply(null, Array(interval)).map(function(v,i) {
+      var gets = Array.apply(null, Array(interval+2)).map(function(v,i) {
         return function(callback) {
           client.get('test', function(err) {
-            // console.log('cb '+i);
-            // console.log(err);
             callback(err);
           });
         };
