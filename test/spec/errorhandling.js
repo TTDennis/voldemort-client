@@ -20,10 +20,13 @@ describe('errorhandling', function () {
 
   before(function (done) {
     client = Client.bootstrap({
-      host      : 'localhost',
-      port      : port,
+      host : 'localhost',
+      port : port
+    }, {
+      store     : 'test',
+      // Use randomize:false to do failover testing
       randomize : false
-    }, { store: 'test' }, done);
+    }, done);
   });
 
   after(function (done) {
@@ -53,6 +56,46 @@ describe('errorhandling', function () {
         chai.expect(err).to.be.null;
         chai.expect(res).to.not.be.null;
         chai.expect(res.value.toString()).to.eql('over');
+        done();
+      });
+    });
+  });
+
+  describe('bootstrap', function () {
+
+    it('skips invalid hosts', function (done) {
+      Client.bootstrap([
+        {},
+        { host: 'somehost' },
+        { host: 'localhost', port: port }
+      ], function (err, client) {
+        chai.expect(err).to.be.null;
+        chai.expect(client.nodes).to.have.length(2);
+        client.close(done);
+      });
+    });
+
+    it('errbacks for failed hosts', function (done) {
+      Client.bootstrap([
+        { host: 'somehost1', port: 3333 },
+        { host: 'somehost2', port: 3333 }
+      ], function (err, client) {
+        chai.expect(err).to.not.be.null;
+        chai.expect(err.message).to.eql('All bootstrap attempts failed');
+        done();
+      });
+    });
+
+    it('errbacks for non-ok protocol', function (done) {
+      var server = require('net').createServer(function (conn) { //'connection' listener
+        conn.on('data', function (data) {
+          conn.write('no');
+        });
+      }).listen(9938);
+      Client.bootstrap({ host:'localhost', port: 9938 }, function (err, client) {
+        chai.expect(err).to.not.be.null;
+        chai.expect(err.message).to.eql('All bootstrap attempts failed');
+        server.close();
         done();
       });
     });

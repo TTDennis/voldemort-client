@@ -1,4 +1,8 @@
+
 node_modules/
 tags/
+lib-cov/
 
 *.py
+TEST-all.xml
+coverage.html
