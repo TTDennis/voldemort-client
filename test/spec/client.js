@@ -44,9 +44,8 @@ describe('client', function () {
     client = Client.bootstrap({ host: host, port: port }, {
       store           : 'test',
       valueSerializer : {
-        // @todo @wejendorp b & v?
-        deserialize : function (b) { return b.toBuffer().toString(); },
-        serialize   : function (v) { return v; }
+        deserialize : function (byteBuffer) { return byteBuffer.toBuffer().toString(); },
+        serialize   : function (value) { return value; }
       }
     }, done);
   });
@@ -192,6 +191,22 @@ describe('client', function () {
         chai.expect(spy).to.have.been.called.once;
         done(err);
       });
+    });
+
+
+    it('reconnects on timeout', function(done) {
+      client.setTimeout(200);
+      async.series([
+        function sleep(next) { setTimeout(next, 300); },
+        function(next) {
+          chai.expect(client.connection.alive()).to.be.false;
+          client.get('test', next);
+        },
+        function(next) {
+          chai.expect(client.connection.alive()).to.be.true;
+          next();
+        }
+      ], done);
     });
   });
 });

@@ -36,6 +36,11 @@ Voldemort.bootstrap([{ host: 'localhost', port: 6666 }], { store: 'products' }, 
 });
 ```
 
+### TODO
+
+  * keep alive connection and use `pb0` response as ping/pong.
+
+
 ## API
 
 ### Voldemort#bootstrap(hosts, [options,] done)
