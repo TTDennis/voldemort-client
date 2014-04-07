@@ -18,7 +18,7 @@ Requires a local Voldemort instance on port `6666`.
 
 ## Documentation
 
-The client is based on the official client [specificiation](https://github.com/voldemort/voldemort/wiki/Writing-own-client-for-Voldemort).
+The client is based on the official client [specification](https://github.com/voldemort/voldemort/wiki/Writing-own-client-for-Voldemort).
 
 ### Example
 
