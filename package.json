@@ -1,8 +1,8 @@
 {
   "name": "voldemort",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Voldemort client for Node.js",
-  "voldemort-version": "1.6.2",
+  "voldemort-version": "1.6.1",
   "main": "index.js",
   "scripts": {
     "test": "mocha test/spec"
