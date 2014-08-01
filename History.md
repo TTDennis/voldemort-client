@@ -1,3 +1,7 @@
+### 0.1.8 - 1 August 2014
+
+- Fix conflict resolver to read correct timestamps
+
 ### 0.1.2 - 27 March 2014
 
 - Fix xml parse error in cluster.
