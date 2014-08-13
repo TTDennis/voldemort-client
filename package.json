@@ -23,13 +23,13 @@
   },
   "homepage": "https://github.com/mojn/node-voldemort",
   "dependencies": {
-    "async": "0.2.10",
-    "debug": "0.7.4",
+    "async": "^0.9.0",
+    "debug": "^1.0.4",
     "frap": "^1.1.0",
-    "long": "1.1.2",
-    "protobufjs": "git+https://github.com/wejendorp/ProtoBuf.js.git",
+    "mocha": "^1.21.4",
+    "protobufjs": "^3.3.0",
     "through": "^2.3.4",
-    "xml2js": "0.4.1"
+    "xml2js": "^0.4.1"
   },
   "devDependencies": {
     "chai": "1.9.0",

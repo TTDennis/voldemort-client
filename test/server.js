@@ -8,7 +8,7 @@ var msgBuilder = require('../lib/protocol/protobuf')('client');
 var protocol = msgBuilder.build('voldemort');
 var fs = require('fs');
 var net = require('net');
-var Long = require('long');
+// var Long = require('long');
 
 /**
  * Mock
@@ -50,7 +50,7 @@ function pbResponder (connection, request) {
         version : new protocol.VectorClock({
           entries : [new protocol.ClockEntry({
             node_id : 0,
-            version : Long.fromInt(1)
+            version : 1
           })]
         })
       })

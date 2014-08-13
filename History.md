@@ -1,3 +1,8 @@
+### 0.1.9 - 13 August 2014
+
+- Fix buffer read error
+- Update and clean up dependencies
+
 ### 0.1.8 - 1 August 2014
 
 - Fix conflict resolver to read correct timestamps
