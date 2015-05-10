@@ -27,7 +27,7 @@
     "debug": "^1.0.4",
     "frap": "^1.1.0",
     "mocha": "^1.21.4",
-    "protobufjs": "2.2.0",
+    "protobufjs": "2.2.1",
     "through": "^2.3.4",
     "xml2js": "^0.4.1"
   },
