@@ -36,7 +36,6 @@ message KeyedVersions {
 
 message GetRequest {
   optional bytes key = 1;
-  optional bytes transforms = 2;
 }
 
 message GetResponse {
@@ -51,12 +50,6 @@ message GetVersionResponse {
 
 message GetAllRequest {
   repeated bytes keys = 1;
-
-  message GetAllTransform {
-    required bytes key = 1;
-    required bytes transform = 2;
-  }
-  repeated GetAllTransform transforms = 2;
 }
 
 message GetAllResponse {
@@ -67,7 +60,6 @@ message GetAllResponse {
 message PutRequest {
   required bytes key = 1;
   required Versioned versioned = 2;
-  optional bytes transforms = 3;
 }
 
 message PutResponse {
