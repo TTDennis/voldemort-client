@@ -23,9 +23,10 @@
   },
   "homepage": "https://github.com/mojn/node-voldemort",
   "dependencies": {
-    "async": "^0.9.0",
+    "async": "^1.5.2",
     "debug": "^1.0.4",
     "frap": "^1.1.0",
+    "long": "^3.0.3",
     "mocha": "^1.21.4",
     "protobufjs": "3.2.2",
     "through": "^2.3.4",
