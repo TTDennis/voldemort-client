@@ -64,6 +64,7 @@ Options:
   * `randomize:bool` Default `true`. Set to `false` to disable randomizing node
     selection in cluster. This will use the nodes in-order starting from the
     bootstrap node.
+  * `routing:string` Either "client" or "server".
 
 ### voldemort#get(key, [options,] done)
 Gets the value of `key` from the default store or `options.store` if set.
