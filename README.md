@@ -1,20 +1,10 @@
+# Info
+This repo is based on the work of [this node module](https://github.com/mojn/node-voldemort).
+It is adapted to specific needs and implements client side routing.
+
 [Voldemort](http://github.com/voldemort/voldemort) is the open source clone of Amazon DynamoDB, a distributed key-value store.
 
-This project is a Node.js driver for Voldemort. It uses round-robin load balancing and does not support client-side routing of keyspace.
-
-## Installation
-
-```bash
-$ npm install voldemort
-```
-
-Run tests with
-
-```bash
-$ npm test
-```
-
-Requires a local Voldemort instance on port `6666`.
+This project is a Node.js driver for Voldemort.
 
 ## Documentation
 
@@ -25,7 +15,7 @@ The client is based on the official client [specification](https://github.com/vo
 Please notice that error handling is left out for brevity.
 
 ```js
-var Voldemort = require('voldemort');
+var Voldemort = require('voldemort-client');
 // Create a client against local voldemort, with default store `products`.
 Voldemort.bootstrap([{ host: 'localhost', port: 6666 }], { store: 'products' }, function (err, client) {
   // Retrieve 'product1' from 'products' store.
@@ -35,11 +25,6 @@ Voldemort.bootstrap([{ host: 'localhost', port: 6666 }], { store: 'products' }, 
   });
 });
 ```
-
-### TODO
-
-  * keep alive connection and use `pb0` response as ping/pong.
-
 
 ## API
 
@@ -61,9 +46,6 @@ Options:
   * `reconnectInterval:integer` Default `500`. Round robin batch size. The
     client will change node after this many requests to distribute load across
     the cluster.
-  * `randomize:bool` Default `true`. Set to `false` to disable randomizing node
-    selection in cluster. This will use the nodes in-order starting from the
-    bootstrap node.
   * `routing:string` Either "client" or "server".
 
 ### voldemort#get(key, [options,] done)

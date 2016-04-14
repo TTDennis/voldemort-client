@@ -1,6 +1,6 @@
 {
-  "name": "voldemort",
-  "version": "0.1.9",
+  "name": "voldemort-client",
+  "version": "0.1.0",
   "description": "Voldemort client for Node.js",
   "voldemort-version": "1.6.1",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mojn/node-voldemort"
+    "url": "https://github.com/TTDennis/voldemort-client"
   },
   "keywords": [
     "voldemort",
@@ -19,9 +19,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mojn/node-voldemort/issues"
+    "url": "https://github.com/TTDennis/voldemort-client/issues"
   },
-  "homepage": "https://github.com/mojn/node-voldemort",
+  "homepage": "https://github.com/TTDennis/voldemort-client",
   "dependencies": {
     "async": "^1.5.2",
     "debug": "^1.0.4",
